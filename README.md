@@ -43,4 +43,4 @@ Spørsmål knyttet til koden eller prosjektet kan rettes mot:
 
 ## For NAV-ansatte
 
-Interne henvendelser kan sendes via Slack i kanalen #minkanal.
+Interne henvendelser kan sendes via Slack i kanalen #nav-frontend.
