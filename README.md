@@ -1,6 +1,8 @@
 fnrvalidator
 ================
 
+[![Build Status](https://travis-ci.com/navikt/fnrvalidator.svg?branch=master)](https://travis-ci.com/navikt/fnrvalidator)
+
 Validering for fødselsnummer og D-nummer. Alle fødselsnumre som forekommer her er autogenererte.
 
 # Komme i gang
