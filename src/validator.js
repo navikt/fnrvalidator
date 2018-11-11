@@ -11,8 +11,6 @@ const dnr = (digits) => {
 }
 
 const validate = (digits, isDnr) => {
-   let errors = []
-
    if (!elevenDigits.test(digits)) {
       return {
          status: "invalid",
