@@ -1,7 +1,7 @@
 fnrvalidator
 ================
 
-Validering for fødselsnummer og D-nummer
+Validering for fødselsnummer og D-nummer. Alle fødselsnumre som forekommer her er autogenererte.
 
 # Komme i gang
 
@@ -37,10 +37,8 @@ eller
 
 # Henvendelser
 
-Spørsmål knyttet til koden eller prosjektet kan rettes mot:
-
-* Navn på Person, navn.person@nav.no
+Spørsmål knyttet til koden eller prosjektet kan stilles som issues her på GitHub.
 
 ## For NAV-ansatte
 
-Interne henvendelser kan sendes via Slack i kanalen #nav-frontend.
+Interne henvendelser kan sendes via Slack i kanalen #område-helse.

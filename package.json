@@ -5,8 +5,10 @@
   "scripts": {
     "test": "$(npm bin)/mocha --reporter spec tests/"
   },
-  "author": "J-K. Solbakken",
+  "author": "NAV (https://nav.no)",
   "license": "MIT",
+  "repository": "github:navikt/fnrvalidator",
+  "main": "src/validator.js",
   "devDependencies": {
     "chai": "4.2.0",
     "mocha": "5.2.0"
