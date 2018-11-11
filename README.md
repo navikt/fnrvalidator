@@ -6,9 +6,7 @@ Validering for fødselsnummer og D-nummer. Alle fødselsnumre som forekommer her
 # Komme i gang
 
 ### Installasjon
-```
-npm i fnrvalidator
-```
+Publiseres plutselig på npmjs.com, inntil da kan man bruke `npm link`
 
 ### Bruk
 ```
