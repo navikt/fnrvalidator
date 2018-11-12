@@ -15,7 +15,7 @@ npm install @navikt/fnrvalidator
 
 ### Bruk
 ```
-const validator = require('fnrvalidator')
+const validator = require('@navikt/fnrvalidator')
 const result = validator.fnr('12345678910')
 const result = validator.dnr('52345678910')
 ```
