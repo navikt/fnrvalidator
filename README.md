@@ -38,6 +38,10 @@ eller
 
 ---
 
+
+### Bygg og publisering
+```npm run build && npm publish```
+
 # Henvendelser
 
 Spørsmål knyttet til koden eller prosjektet kan stilles som issues her på GitHub.
