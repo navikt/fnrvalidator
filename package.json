@@ -1,15 +1,22 @@
 {
   "name": "@navikt/fnrvalidator",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Validation for Norwegian national id numbers (\"fødselsnummer\" and \"d-nummer\")",
   "scripts": {
+    "build": "babel src -d dist",
     "test": "$(npm bin)/mocha --reporter spec tests/"
   },
   "author": "NAV (https://nav.no)",
   "license": "MIT",
   "repository": "github:navikt/fnrvalidator",
-  "main": "src/validator.js",
+  "bugs": {
+    "url": "https://github.com/navikt/fnrvalidator/issues"
+  },
+  "main": "dist/validator.js",
   "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
     "chai": "4.2.0",
     "mocha": "5.2.0"
   }

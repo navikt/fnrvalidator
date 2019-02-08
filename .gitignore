@@ -39,3 +39,9 @@ jspm_packages
 
 # Yarn package manager
 yarn.lock
+
+# IntelliJ project folder
+.idea
+
+# Built JS folder
+dist
