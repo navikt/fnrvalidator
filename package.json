@@ -10,7 +10,7 @@
   "license": "MIT",
   "repository": "github:navikt/fnrvalidator",
   "bugs": {
-     "url": "https://github.com/navikt/fnrvalidator/issues"
+    "url": "https://github.com/navikt/fnrvalidator/issues"
   },
   "main": "dist/validator.js",
   "devDependencies": {
