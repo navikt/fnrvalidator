@@ -1,4 +1,14 @@
 language: node_js
-
 node_js:
-  - "7"
+   - "node"
+deploy:
+   provider: npm
+   email: jan-kare.solbakken@nav.no
+   api_key: $NPM_TOKEN
+   on:
+      tags: true
+before_install:
+   - npm i -g makeshift && makeshift -s @navikt -r https://registry.npmjs.org
+env:
+   global:
+      secure: GFjQJlnz6N9WgznvGuSPh48TGyHS0rALoncbEA5pVb3KkdqEnZG9o8MRi+/pq05FkikSkcwsFfBcOksCfx39pMatnD3cY3UBrMOXGC4Z2mZs/In0xOMh2Y/Wljz1clDvU28rLRsZrIuz7OcsMJj5q6h6KR3LpCk5U5WQ1v+4GCcgBl6vQvHp+dWsqTFrT3O9Fl40AfY6oyLi73v1/416rzdXxEJHHDZUDhbq204hcGNN5faogkx+JFvNRyOF4254ObFW54BtPmU0Rt9bVQHSzCpWrY1RfZo5SRtH7NaYrSadINLWRJAyNTPLAvRAhIH1QbVWxlzNUCEk8I+OR0e+Eg/6+S8NIhSfvn+6+5Utc4/QFwORM0UC0e23e4+pJ+OjYb9G2nrdkY33WevBgDODGX/QZjjom74hSzdTyFTpm+y65aaZmDZVkXMTa1DZ1cZtmZOR4rw6MTbH5+WQr7+DnJk918n7ZtNUN61P+QOQWfx6DJ17d6vqu2krarUPTkc4FMN9VI+pYOYEpkJm+yVD5ifj/7nAwgh+uXwjV7sqeWGE/yFIzZUZIXYR2QHLu0gZF2n0YUD56ZIdkYXad1rOGkbEDXxtEoHqCGhKkwJ7vUfIY36cdIMOF7YgE20U+580AM5VQCGG0LIJQrJktOnaeawD+uJcjEwCP2LCoyjbvU0=
