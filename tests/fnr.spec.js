@@ -12,6 +12,13 @@ describe("fnr", function () {
          status: "valid"
       })
    })
+
+   it("should compensate for checksum digits that are 11", function () {
+      const result = validator.fnr("15021951940")
+      return expect(result).to.deep.equal({
+         status: "valid"
+      })
+   })
    
    it("should reject if less than 11 digits", function () {
       const result = validator.fnr("1234567890")
