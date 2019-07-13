@@ -1,7 +1,7 @@
 fnrvalidator
 ================
 
-[![Build Status](https://travis-ci.com/navikt/fnrvalidator.svg?branch=master)](https://travis-ci.com/navikt/fnrvalidator)
+[![CircleCI](https://circleci.com/gh/navikt/fnrvalidator.svg?style=svg)](https://circleci.com/gh/navikt/fnrvalidator)
 [![npm version](https://badge.fury.io/js/%40navikt%2Ffnrvalidator.svg)](https://badge.fury.io/js/%40navikt%2Ffnrvalidator)
 
 Validering for fødselsnummer og D-nummer. Alle fødselsnumre som forekommer her er autogenererte.
