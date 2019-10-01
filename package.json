@@ -14,10 +14,10 @@
   },
   "main": "dist/validator.js",
   "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.3.1",
+    "@babel/cli": "^7.6.2",
+    "@babel/core": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
     "chai": "4.2.0",
-    "mocha": "5.2.0"
+    "mocha": "6.2.1"
   }
 }
