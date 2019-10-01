@@ -3,7 +3,7 @@ name: tags
 on:
    push:
       tags:
-         - *
+         - v*
 
 jobs:
    build:
