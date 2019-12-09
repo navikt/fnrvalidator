@@ -14,7 +14,7 @@
   },
   "main": "dist/validator.js",
   "devDependencies": {
-    "@babel/cli": "^7.7.4",
+    "@babel/cli": "^7.7.5",
     "@babel/core": "^7.7.5",
     "@babel/preset-env": "^7.7.4",
     "chai": "4.2.0",
