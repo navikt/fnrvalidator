@@ -16,14 +16,18 @@ npm install @navikt/fnrvalidator
 ### Bruk
 ```
 const validator = require('@navikt/fnrvalidator')
-const result = validator.fnr('12345678910')
-const result = validator.dnr('52345678910')
+const fnr = validator.fnr('12345678910')
+const dnr = validator.dnr('52345678910')
+// eller
+const fnr = validator.nr('12345678910')
+const dnr = validator.nr('52345678910')
 ```
 
 ### Resultat
 ```
 {
    status: "valid"
+   type: "fnr" || "dnr"
 }
 ```
 
