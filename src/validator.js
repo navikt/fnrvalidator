@@ -3,14 +3,14 @@
 const elevenDigits = new RegExp('^\\d{11}$')
 
 const fnr = (digits) => {
-   return nr(digits)
+   return idnr(digits)
 }
 
 const dnr = (digits) => {
-   return nr(digits)
+   return idnr(digits)
 }
 
-const nr = (digits) => {
+const idnr = (digits) => {
    const isDnr = digits.substring(0, 1) >= 4
    return validate(digits, isDnr)
 }
@@ -61,4 +61,4 @@ const birthdate = (digits, isDnr) => {
 
  exports.fnr = fnr
  exports.dnr = dnr
- exports.nr = nr
+ exports.nr = idnr
