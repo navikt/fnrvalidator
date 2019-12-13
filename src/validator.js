@@ -61,4 +61,4 @@ const birthdate = (digits, isDnr) => {
 
  exports.fnr = fnr
  exports.dnr = dnr
- exports.nr = idnr
+ exports.idnr = idnr
