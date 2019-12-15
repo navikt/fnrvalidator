@@ -19,8 +19,8 @@ const validator = require('@navikt/fnrvalidator')
 const fnr = validator.fnr('12345678910')
 const dnr = validator.dnr('52345678910')
 // eller
-const fnr = validator.idnr('12345678910')
-const dnr = validator.idnr('52345678910')
+const validationResult = validator.idnr('12345678910')
+const validationResult = validator.idnr('52345678910')
 ```
 
 ### Resultat
