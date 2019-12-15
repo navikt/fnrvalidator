@@ -9,22 +9,24 @@ describe("fnr", function () {
    it("should accept a valid one", function () {
       const result = validator.fnr("13097248022")
       return expect(result).to.deep.equal({
-         status: "valid"
+         status: "valid",
+         type: "fnr"
       })
    })
 
    it("should compensate for checksum digits that are 11", function () {
       const result = validator.fnr("15021951940")
       return expect(result).to.deep.equal({
-         status: "valid"
+         status: "valid",
+         type: "fnr"
       })
    })
-   
+
    it("should reject if less than 11 digits", function () {
       const result = validator.fnr("1234567890")
       return expect(result).to.deep.equal({
          status: "invalid",
-         reasons: ["fnr must consist of 11 digits"]
+         reasons: ["fnr or dnr must consist of 11 digits"]
       })
    })
 
@@ -32,7 +34,7 @@ describe("fnr", function () {
       const result = validator.fnr("123456789101")
       return expect(result).to.deep.equal({
          status: "invalid",
-         reasons: ["fnr must consist of 11 digits"]
+         reasons: ["fnr or dnr must consist of 11 digits"]
       })
    })
 
@@ -40,7 +42,7 @@ describe("fnr", function () {
       const result = validator.fnr("1234567891A")
       return expect(result).to.deep.equal({
          status: "invalid",
-         reasons: ["fnr must consist of 11 digits"]
+         reasons: ["fnr or dnr must consist of 11 digits"]
       })
    })
 
@@ -83,7 +85,8 @@ describe("dnr", function () {
    it("should accept a valid one", function () {
       const result = validator.dnr("53097248016")
       return expect(result).to.deep.equal({
-         status: "valid"
+         status: "valid",
+         type: "dnr"
       })
    })
 })
