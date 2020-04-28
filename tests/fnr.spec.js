@@ -14,6 +14,22 @@ describe("fnr", function () {
       })
    })
 
+   it("should accept a standard leap year", function () {
+      const result = validator.fnr("29029648784")
+      return expect(result).to.deep.equal({
+         status: "valid",
+         type: "fnr"
+      })
+   })
+
+   it("should accept year 00 as valid leap year", function () {
+      const result = validator.fnr("29020075838")
+      return expect(result).to.deep.equal({
+         status: "valid",
+         type: "fnr"
+      })
+   })
+
    it("should compensate for checksum digits that are 11", function () {
       const result = validator.fnr("15021951940")
       return expect(result).to.deep.equal({
