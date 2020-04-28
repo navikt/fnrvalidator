@@ -54,7 +54,10 @@ const birthdate = (digits, isDnr) => {
    const day = digits.substring(0, 2)
    const month = digits.substring(2, 4)
    const year = digits.substring(4, 6)
-   const date = new Date(year, month - 1, day)
+
+   // set year 00 default to 2000 instead of 1900
+   const date = new Date(year === '00' ? '2000' : year, month - 1, day)
+
    return (date && (date.getMonth() + 1) == month && date.getDate() == day) ?
       [] : ["invalid date"]
  }
