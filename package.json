@@ -15,7 +15,7 @@
   "main": "dist/validator.js",
   "typings": "fnrvalidator.d.ts",
   "devDependencies": {
-    "@babel/cli": "^7.12.10",
+    "@babel/cli": "^7.12.13",
     "@babel/core": "^7.12.13",
     "@babel/preset-env": "^7.12.13",
     "chai": "4.3.0",
