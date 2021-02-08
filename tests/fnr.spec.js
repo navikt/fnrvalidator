@@ -131,11 +131,11 @@ describe("dnr", function () {
          "69422056629",
          "45440356293",
          "52429405181",
-         "52505209540",
+         "52505209540x",
          "61483601467",
          "61528703428",
       ]
-      dollyUsersitDnr.forEach(dollyUser => {
+      dollyUsersDnr.forEach(dollyUser => {
          const result = validator.fnr(dollyUser)
          expect(result).to.deep.equal({
             status: "valid",
