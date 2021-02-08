@@ -94,6 +94,25 @@ describe("fnr", function () {
       })
    })
 
+   it("should accept valid synthetic NAV/Skatt users", function () {
+      const dollyUsersFnr = [
+         "15507600333",
+         "29422059278",
+         "05440355678",
+         "12429400544",
+         "12505209719",
+         "21483609245",
+         "21528704651",
+      ]
+      dollyUsersFnr.forEach(dollyUser => {
+         const result = validator.fnr(dollyUser)
+         expect(result).to.deep.equal({
+            status: "valid",
+            type: "fnr"
+         })
+      })
+
+   })
 })
 
 describe("dnr", function () {
@@ -105,4 +124,25 @@ describe("dnr", function () {
          type: "dnr"
       })
    })
+
+   it("should accept valid synthetic NAV/Skatt users with dnr", function () {
+      const dollyUsersDnr = [
+         "55507608360",
+         "69422056629",
+         "45440356293",
+         "52429405181",
+         "52505209540",
+         "61483601467",
+         "61528703428",
+      ]
+      dollyUsersitDnr.forEach(dollyUser => {
+         const result = validator.fnr(dollyUser)
+         expect(result).to.deep.equal({
+            status: "valid",
+            type: "dnr"
+         })
+      })
+
+   })
+
 })

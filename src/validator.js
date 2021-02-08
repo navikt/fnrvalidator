@@ -45,6 +45,18 @@ const checksums = (digits) => {
       [] : ["checksums don't match"]
 }
 
+const resolveMonth = (digits) => {
+   let firstMonthDigit = digits[2];
+   if (digits[2] >= 8) {
+      // Skatt synthetic id
+      firstMonthDigit = digits[2] - 8;
+   } else if (digits[2] >= 4) {
+      // NAV synthetic id
+      firstMonthDigit = digits[2] - 4
+   }
+   return firstMonthDigit + digits.substring(3, 4)
+}
+
 // copied from https://stackoverflow.com/questions/5812220/how-to-validate-a-date
 const birthdate = (digits, isDnr) => {
    if (isDnr) {
@@ -52,7 +64,7 @@ const birthdate = (digits, isDnr) => {
    }
 
    const day = digits.substring(0, 2)
-   const month = digits.substring(2, 4)
+   const month = resolveMonth(digits)
    const year = digits.substring(4, 6)
 
    // set year 00 default to 2000 instead of 1900
