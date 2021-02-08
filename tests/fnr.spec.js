@@ -94,7 +94,7 @@ describe("fnr", function () {
       })
    })
 
-   it("should accept valid synthetic NAV/Skatt users", function () {
+   it("should accept valid synthetic NAV users", function () {
       const dollyUsersFnr = [
          "15507600333",
          "29422059278",
@@ -106,6 +106,26 @@ describe("fnr", function () {
       ]
       dollyUsersFnr.forEach(dollyUser => {
          const result = validator.fnr(dollyUser)
+         expect(result).to.deep.equal({
+            status: "valid",
+            type: "fnr"
+         })
+      })
+
+   })
+
+   it("should accept valid synthetic Skatt users", function () {
+      const skattUserFnr = [
+         "17912099997",
+         "29822099635",
+         "05840399895",
+         "12829499914",
+         "12905299938",
+         "21883649874",
+         "21929774873",
+      ]
+      skattUserFnr.forEach(skattUser => {
+         const result = validator.fnr(skattUser)
          expect(result).to.deep.equal({
             status: "valid",
             type: "fnr"
@@ -125,18 +145,38 @@ describe("dnr", function () {
       })
    })
 
-   it("should accept valid synthetic NAV/Skatt users with dnr", function () {
+   it("should accept valid synthetic NAV users with dnr", function () {
       const dollyUsersDnr = [
          "55507608360",
          "69422056629",
          "45440356293",
          "52429405181",
-         "52505209540x",
+         "52505209540",
          "61483601467",
          "61528703428",
       ]
       dollyUsersDnr.forEach(dollyUser => {
          const result = validator.fnr(dollyUser)
+         expect(result).to.deep.equal({
+            status: "valid",
+            type: "dnr"
+         })
+      })
+
+   })
+
+   it("should accept valid synthetic Skatt users with dnr", function () {
+      const skattUsersDnr = [
+         "57912075186",
+         "69822075096",
+         "45840375084",
+         "52829400197",
+         "52905200100",
+         "61883600222",
+         "61929750062"
+      ]
+      skattUsersDnr.forEach(skattUser => {
+         const result = validator.fnr(skattUser)
          expect(result).to.deep.equal({
             status: "valid",
             type: "dnr"
