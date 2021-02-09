@@ -30,6 +30,14 @@ describe("fnr", function () {
       })
    })
 
+   it("should reject if date is > 28 feb in a non leap year", function () {
+      const result = validator.fnr("29020112345")
+      return expect(result).to.deep.equal({
+         status: "invalid",
+         reasons: ["checksums don't match", "invalid date"]
+      })
+   })
+
    it("should compensate for checksum digits that are 11", function () {
       const result = validator.fnr("15021951940")
       return expect(result).to.deep.equal({
