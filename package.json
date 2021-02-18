@@ -19,6 +19,6 @@
     "@babel/core": "^7.12.13",
     "@babel/preset-env": "^7.12.16",
     "chai": "4.3.0",
-    "mocha": "8.2.1"
+    "mocha": "8.3.0"
   }
 }
