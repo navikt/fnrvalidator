@@ -17,7 +17,7 @@
   "devDependencies": {
     "@babel/cli": "^7.13.0",
     "@babel/core": "^7.13.1",
-    "@babel/preset-env": "^7.13.0",
+    "@babel/preset-env": "^7.13.8",
     "chai": "4.3.0",
     "mocha": "8.3.0"
   }
