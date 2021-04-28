@@ -3,3 +3,4 @@ tests
 src
 .babelrc
 .editorconfig
+.idea
