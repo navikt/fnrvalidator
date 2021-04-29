@@ -1,0 +1,37 @@
+version: 2
+registries:
+  npm-registry-npm-pkg-github-com-navikt-data-catalog-components:
+    type: npm-registry
+    url: https://npm.pkg.github.com/@navikt/data-catalog-components
+    token: "${{secrets.NPM_REGISTRY_NPM_PKG_GITHUB_COM_NAVIKT_DATA_CATALOG_COMPONENTS_TOKEN}}"
+  npm-registry-npm-pkg-github-com-deetly-plotly-view:
+    type: npm-registry
+    url: https://npm.pkg.github.com/@deetly/plotly-view
+    token: "${{secrets.NPM_REGISTRY_NPM_PKG_GITHUB_COM_DEETLY_PLOTLY_VIEW_TOKEN}}"
+
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "04:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: "@babel/cli"
+    versions:
+    - 7.12.17
+    - 7.13.14
+  - dependency-name: "@babel/core"
+    versions:
+    - 7.12.17
+    - 7.13.13
+  - dependency-name: chai
+    versions:
+    - 4.3.1
+  - dependency-name: "@babel/preset-env"
+    versions:
+    - 7.12.17
+    - 7.13.5
+  registries:
+  - npm-registry-npm-pkg-github-com-navikt-data-catalog-components
+  - npm-registry-npm-pkg-github-com-deetly-plotly-view
