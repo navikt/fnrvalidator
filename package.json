@@ -16,7 +16,7 @@
   "typings": "fnrvalidator.d.ts",
   "devDependencies": {
     "@babel/cli": "^7.13.16",
-    "@babel/core": "^7.13.16",
+    "@babel/core": "^7.14.0",
     "@babel/preset-env": "^7.14.0",
     "caniuse-lite": "^1.0.30001219",
     "chai": "4.3.4",
