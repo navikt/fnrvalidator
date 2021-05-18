@@ -17,7 +17,7 @@
   "devDependencies": {
     "@babel/cli": "^7.14.3",
     "@babel/core": "^7.14.3",
-    "@babel/preset-env": "^7.14.1",
+    "@babel/preset-env": "^7.14.2",
     "caniuse-lite": "^1.0.30001228",
     "chai": "4.3.4",
     "mocha": "8.4.0"
