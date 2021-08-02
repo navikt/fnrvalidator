@@ -20,6 +20,6 @@
     "@babel/preset-env": "^7.14.9",
     "caniuse-lite": "^1.0.30001248",
     "chai": "4.3.4",
-    "mocha": "9.0.2"
+    "mocha": "9.0.3"
   }
 }
