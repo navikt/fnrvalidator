@@ -15,7 +15,7 @@
   "main": "dist/validator.js",
   "typings": "fnrvalidator.d.ts",
   "devDependencies": {
-    "@babel/cli": "^7.16.7",
+    "@babel/cli": "^7.16.8",
     "@babel/core": "^7.16.7",
     "@babel/preset-env": "^7.16.7",
     "caniuse-lite": "^1.0.30001300",
