@@ -50,7 +50,7 @@ describe("fnr", function () {
       const result = validator.fnr("1234567890")
       return expect(result).to.deep.equal({
          status: "invalid",
-         reasons: ["fnr or dnr must consist of 11 digits"]
+         reasons: ["fnr, dnr or hnr must consist of 11 digits"]
       })
    })
 
@@ -58,7 +58,7 @@ describe("fnr", function () {
       const result = validator.fnr("123456789101")
       return expect(result).to.deep.equal({
          status: "invalid",
-         reasons: ["fnr or dnr must consist of 11 digits"]
+         reasons: ["fnr, dnr or hnr must consist of 11 digits"]
       })
    })
 
@@ -66,7 +66,7 @@ describe("fnr", function () {
       const result = validator.fnr("1234567891A")
       return expect(result).to.deep.equal({
          status: "invalid",
-         reasons: ["fnr or dnr must consist of 11 digits"]
+         reasons: ["fnr, dnr or hnr must consist of 11 digits"]
       })
    })
 
@@ -111,6 +111,17 @@ describe("dnr", function () {
       return expect(result).to.deep.equal({
          status: "valid",
          type: "dnr"
+      })
+   })
+})
+
+describe("hnr", function () {
+   // hnr is identical to fnr except for the third digit
+   it("should accept a valid one", function () {
+      const result = validator.hnr("13527248013")
+      return expect(result).to.deep.equal({
+         status: "valid",
+         type: "hnr"
       })
    })
 })
