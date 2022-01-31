@@ -10,22 +10,35 @@ const dnr = (digits) => {
    return idnr(digits)
 }
 
-const idnr = (digits) => {
-   const isDnr = digits.substring(0, 1) >= 4
-   return validate(digits, isDnr)
+const hnr = (digits) => {
+   return idnr(digits)
 }
 
-const validate = (digits, isDnr) => {
+const getType = (digits) => {
+   if (digits.substring(0, 1) >= 4) {
+      return 'dnr'
+   } else if (digits.substring(2, 3) >= 4) {
+      return 'hnr'
+   }
+   return 'fnr'
+}
+
+const idnr = (digits) => {
+   const type = getType(digits)
+   return validate(digits, type)
+}
+
+const validate = (digits, type) => {
    if (!elevenDigits.test(digits)) {
       return {
          status: "invalid",
-         reasons: ["fnr or dnr must consist of 11 digits"]
+         reasons: ["fnr, dnr or hnr must consist of 11 digits"]
       }
    }
 
-   const errMsgs = [...checksums(digits), ...birthdate(digits, isDnr)]
+   const errMsgs = [...checksums(digits), ...birthdate(digits, type)]
 
-   return errMsgs.length == 0 ? {status: "valid", type: isDnr ? 'dnr' : 'fnr'} :
+   return errMsgs.length == 0 ? {status: "valid", type} :
       {
          status: "invalid",
          reasons: errMsgs
@@ -46,9 +59,11 @@ const checksums = (digits) => {
 }
 
 // copied from https://stackoverflow.com/questions/5812220/how-to-validate-a-date
-const birthdate = (digits, isDnr) => {
-   if (isDnr) {
+const birthdate = (digits, type) => {
+   if (type === 'dnr') {
       digits = (digits.substring(0, 1) - 4) + digits.substring(1)
+   } else if (type === 'hnr') {
+      digits = digits.substring(0, 2) + (digits.substring(2, 3) - 4) + digits.substring(3)
    }
 
    const day = digits.substring(0, 2)
@@ -64,4 +79,5 @@ const birthdate = (digits, isDnr) => {
 
  exports.fnr = fnr
  exports.dnr = dnr
+ exports.hnr = hnr
  exports.idnr = idnr
