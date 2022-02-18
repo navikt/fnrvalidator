@@ -81,3 +81,4 @@ const birthdate = (digits, type) => {
  exports.dnr = dnr
  exports.hnr = hnr
  exports.idnr = idnr
+ exports.getType = getType
