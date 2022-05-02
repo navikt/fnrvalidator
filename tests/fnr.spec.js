@@ -125,3 +125,13 @@ describe("hnr", function () {
       })
    })
 })
+describe("tnr", function () {
+   // tnr is identical to fnr except for the third digit which is increased with 8
+   it("should accept a valid one", function () {
+      const result = validator.tnr("10915596784");
+      return expect(result).to.deep.equal({
+         status: "valid",
+         type: "tnr",
+      });
+   });
+});
