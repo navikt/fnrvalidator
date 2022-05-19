@@ -9,9 +9,11 @@ jobs:
    build:
       runs-on: ubuntu-latest
       steps:
-         - uses: actions/setup-node@v1
+         - uses: actions/setup-node@v3
            with:
               node-version: "12.x"
+              registry-url: "https://npm.pkg.github.com"
+              scope: "@navikt"
          - uses: actions/checkout@v1
          - name: install deps
            run: npm install
@@ -19,3 +21,20 @@ jobs:
            run: npm run test
          - name: build
            run: npm run build
+         - run: npm publish
+           env:
+              NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+   increment-version:
+      runs-on: ubuntu-latest
+      needs: [build]
+      steps:
+         - uses: actions/checkout@v3
+         - uses: actions/setup-node@v3
+         - name: Setup github connection for auth
+           run: |
+              git config --global user.email "github-actions[bot]@users.noreply.github.com"
+              git config --global user.name "github-actions[bot]"
+              git remote set-url origin https://github-actions[bot]:$NAV_DS_TOKEN@github.com/$GITHUB_REPOSITORY.git
+         - run: yarn version minor
+         - run: git add . && git commit -m "[skip ci] bump version" && git push
