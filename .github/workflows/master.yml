@@ -36,5 +36,5 @@ jobs:
               git config --global user.email "github-actions[bot]@users.noreply.github.com"
               git config --global user.name "github-actions[bot]"
               git remote set-url origin https://github-actions[bot]:$NAV_DS_TOKEN@github.com/$GITHUB_REPOSITORY.git
-         - run: yarn version minor
-         - run: git add . && git commit -m "[skip ci] bump version" && git push
+         - run: npm version patch -m "[skip ci] bump version %s"
+         - run: git push
