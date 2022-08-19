@@ -19,7 +19,7 @@
     "@babel/cli": "^7.17.10",
     "@babel/core": "^7.17.10",
     "@babel/preset-env": "^7.17.10",
-    "caniuse-lite": "^1.0.30001340",
+    "caniuse-lite": "^1.0.30001378",
     "chai": "4.3.6",
     "mocha": "10.0.0"
   }
