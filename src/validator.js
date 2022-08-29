@@ -18,8 +18,15 @@ const tnr = (digits) => {
    return idnr(digits)
 }
 
+const tnrAndDnr = (digits) => {
+   return idnr(digits)
+}
+
 const getType = (digits) => {
-   if (digits.substring(0, 1) >= 4) {
+   if (digits.substring(0, 1) >= 4 && digits.substring(2, 3) >= 4) {
+      return 'dnr-and-tnr'
+   }
+   else if (digits.substring(0, 1) >= 4) {
       return 'dnr'
    } else if (digits.substring(2, 3) >= 8) {
       return "tnr"
@@ -72,6 +79,8 @@ const birthdate = (digits, type) => {
       digits = digits.substring(0, 2) + (digits.substring(2, 3) - 4) + digits.substring(3)
    } else if (type === 'tnr') {
       digits = digits.substring(0, 2) + (digits.substring(2, 3) - 8) + digits.substring(3)
+   } else if (type === 'dnr-and-tnr') {
+      digits = (digits.substring(0, 1) - 4) + digits.substring(1, 2) + (digits.substring(2, 3) - 4) + digits.substring(3)
    }
 
    const day = digits.substring(0, 2)
@@ -89,4 +98,5 @@ const birthdate = (digits, type) => {
  exports.dnr = dnr
  exports.hnr = hnr
  exports.tnr = tnr
+ exports.tnrAndDnr = tnrAndDnr
  exports.idnr = idnr
