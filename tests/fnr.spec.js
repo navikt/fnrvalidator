@@ -137,13 +137,13 @@ describe("tnr", function () {
 })
 
 
-describe("dnr-and-tnr", function () {
-   // combined dnr and tnr - so both first and third digit is increased
+describe("dnr-and-hnr", function () {
+   // combined dnr and hnr - so both first and third digit is increased with 4
    it("should accept a valid one", function () {
-      const result = validator.tnrAndDnr("68467038838");
+      const result = validator.dnrAndHnr("68467038838");
       return expect(result).to.deep.equal({
          status: "valid",
-         type: "dnr-and-tnr",
+         type: "dnr-and-hnr",
       });
    });
 })
