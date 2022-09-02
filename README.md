@@ -20,18 +20,20 @@ const fnr = validator.fnr('12345678910')
 const dnr = validator.dnr('52345678910')
 const hnr = validator.hnr('13527248013')
 const tnr = validator.tnr('10915596784')
+const dnrAndHnr = validator.dnrAndHnr('68467038838')
 // eller
 const validationResult = validator.idnr('12345678910')
 const validationResult = validator.idnr('52345678910')
 const validationResult = validator.idnr('13527248013')
 const validationResult = validator.idnr('10915596784')
+const validationResult = validator.idnr('68467038838')
 ```
 
 ### Resultat
 ```
 {
    status: "valid"
-   type: "fnr" || "dnr" || "hnr" || "tnr"
+   type: "fnr" || "dnr" || "hnr" || "tnr" || "dnrAndHnr"
 }
 ```
 

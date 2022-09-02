@@ -134,4 +134,17 @@ describe("tnr", function () {
          type: "tnr",
       });
    });
-});
+})
+
+
+describe("dnr-and-hnr", function () {
+   // combined dnr and hnr - so both first and third digit is increased with 4
+   it("should accept a valid one", function () {
+      const result = validator.dnrAndHnr("68467038838");
+      return expect(result).to.deep.equal({
+         status: "valid",
+         type: "dnr-and-hnr",
+      });
+   });
+})
+;
