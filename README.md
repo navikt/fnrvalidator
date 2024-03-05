@@ -54,4 +54,4 @@ eller
 
 # Henvendelser
 
-Spørsmål knyttet til koden eller prosjektet kan stilles som issues her på GitHub.
+Spørsmål knyttet til koden eller prosjektet kan stilles som issues her på GitHub. 
