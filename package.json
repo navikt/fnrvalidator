@@ -3,7 +3,7 @@
   "version": "1.3.4",
   "description": "Validation for Norwegian national id numbers (\"fødselsnummer\" and \"d-nummer\")",
   "scripts": {
-    "build": "$(npm bin)/babel src -d dist",
+    "build": "npx babel src -d dist",
     "test": "npx mocha --reporter spec tests/",
     "test-w": "npx mocha --watch --reporter spec tests/"
   },
