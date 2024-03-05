@@ -9,7 +9,10 @@
   },
   "author": "NAV (https://nav.no)",
   "license": "MIT",
-  "repository": "github:navikt/fnrvalidator",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navikt/fnrvalidator.git"
+  },
   "bugs": {
     "url": "https://github.com/navikt/fnrvalidator/issues"
   },
