@@ -95,7 +95,7 @@ jobs:
           registry-url: "https://npm.pkg.github.com"
           scope: "@navikt"
           node-version: ${{ env.NODE_VERSION }}
-      - run: npm publish --provenance
+      - run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
