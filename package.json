@@ -3,9 +3,9 @@
   "version": "1.3.4",
   "description": "Validation for Norwegian national id numbers (\"fødselsnummer\" and \"d-nummer\")",
   "scripts": {
-    "build": "npx babel src -d dist",
-    "test": "npx mocha --reporter spec tests/",
-    "test-w": "npx mocha --watch --reporter spec tests/"
+    "build": "babel src -d dist",
+    "test": "mocha --reporter spec tests/",
+    "test-w": "mocha --watch --reporter spec tests/"
   },
   "author": "NAV (https://nav.no)",
   "license": "MIT",
