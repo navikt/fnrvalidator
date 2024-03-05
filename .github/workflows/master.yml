@@ -68,7 +68,7 @@ jobs:
       - run: npm version patch -m "[skip ci] bump version %s"
       - run: git push
   
-  publish to npm:
+  publish-to-npm:
     runs-on: ubuntu-latest
     permissions:
       contents: read 
