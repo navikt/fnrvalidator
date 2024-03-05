@@ -20,7 +20,8 @@ jobs:
           disable-sudo: true
           egress-policy: block
           allowed-endpoints: >
-            github.com:443 registry.npmjs.org:443
+            github.com:443 
+            registry.npmjs.org:443
       - uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # ratchet:actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
@@ -79,9 +80,10 @@ jobs:
         uses: step-security/harden-runner@63c24ba6bd7ba022e95695ff85de572c04a18142 # ratchet:step-security/harden-runner@v2
         with:
           disable-sudo: true
-          egress-policy: block
+          egress-policy: audit
           allowed-endpoints: >
-            github.com:443 npm.pkg.github.com:443,
+            github.com:443 
+            npm.pkg.github.com:443,
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # ratchet:actions/checkout@v4
         with:
           persist-credentials: false
