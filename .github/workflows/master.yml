@@ -74,6 +74,7 @@ jobs:
     permissions:
       contents: read 
       id-token: write
+      packages: write
     needs: [increment-version]
     steps:
       - name: Harden runner
