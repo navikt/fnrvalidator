@@ -1,40 +1,97 @@
-name: master
+name: Build and publish master
 
 on:
-   push:
-      branches:
-         - master
+  push:
+    branches:
+      - master
+
+env:
+  NODE_VERSION: "20.x"
 
 jobs:
-   build:
-      runs-on: ubuntu-latest
-      steps:
-         - uses: actions/setup-node@v3
-           with:
-              node-version: "12.x"
-              registry-url: "https://npm.pkg.github.com"
-              scope: "@navikt"
-         - uses: actions/checkout@v1
-         - name: install deps
-           run: npm install
-         - name: test
-           run: npm run test
-         - name: build
-           run: npm run build
-         - run: npm publish
-           env:
-              NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Harden runner
+        uses: step-security/harden-runner@63c24ba6bd7ba022e95695ff85de572c04a18142 # ratchet:step-security/harden-runner@v2
+        with:
+          disable-sudo: true
+          egress-policy: block
+          allowed-endpoints: >
+            github.com:443 registry.npmjs.org:443
+      - uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # ratchet:actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # ratchet:actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Cache node deps
+        id: cache-node
+        uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # ratchet:actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-node-
+      - name: install deps
+        run: npm install
+      - name: test
+        run: npm run test
+      - name: build
+        run: npm run build
+  
+  increment-version:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    needs: [build]
+    steps:
+      - name: Harden runner
+        uses: step-security/harden-runner@63c24ba6bd7ba022e95695ff85de572c04a18142 # ratchet:step-security/harden-runner@v2
+        with:
+          disable-sudo: true
+          egress-policy: block
+          allowed-endpoints: >
+            github.com:443
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # ratchet:actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # ratchet:actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Configure git
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git remote set-url origin https://github-actions[bot]:$NAV_DS_TOKEN@github.com/$GITHUB_REPOSITORY.git
+      - run: npm version patch -m "[skip ci] bump version %s"
+      - run: git push
+  
+  publish to npm:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read 
+      id-token: write
+    needs: [increment-version]
+    steps:
+      - name: Harden runner
+        uses: step-security/harden-runner@63c24ba6bd7ba022e95695ff85de572c04a18142 # ratchet:step-security/harden-runner@v2
+        with:
+          disable-sudo: true
+          egress-policy: block
+          allowed-endpoints: >
+            github.com:443 registry.npmjs.org:443
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # ratchet:actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # ratchet:actions/setup-node@v4
+        with:
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@navikt"
+          node-version: ${{ env.NODE_VERSION }}
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-   increment-version:
-      runs-on: ubuntu-latest
-      needs: [build]
-      steps:
-         - uses: actions/checkout@v3
-         - uses: actions/setup-node@v3
-         - name: Setup github connection for auth
-           run: |
-              git config --global user.email "github-actions[bot]@users.noreply.github.com"
-              git config --global user.name "github-actions[bot]"
-              git remote set-url origin https://github-actions[bot]:$NAV_DS_TOKEN@github.com/$GITHUB_REPOSITORY.git
-         - run: npm version patch -m "[skip ci] bump version %s"
-         - run: git push
+
