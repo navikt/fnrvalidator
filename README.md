@@ -15,18 +15,21 @@ npm install @navikt/fnrvalidator
 
 ### Bruk
 ```
-const validator = require('@navikt/fnrvalidator')
-const fnr = validator.fnr('12345678910')
-const dnr = validator.dnr('52345678910')
-const hnr = validator.hnr('13527248013')
-const tnr = validator.tnr('10915596784')
+import { fnr, dnr, hnr, tnr, dnrAndHnr } from '@navikt/fnrvalidator'
+```
+
+```
+const fnr = fnr('12345678910')
+const dnr = dnr('52345678910')
+const hnr = hnr('13527248013')
+const tnr = tnr('10915596784')
 const dnrAndHnr = validator.dnrAndHnr('68467038838')
 // eller
-const validationResult = validator.idnr('12345678910')
-const validationResult = validator.idnr('52345678910')
-const validationResult = validator.idnr('13527248013')
-const validationResult = validator.idnr('10915596784')
-const validationResult = validator.idnr('68467038838')
+const validationResult = idnr('12345678910')
+const validationResult = idnr('52345678910')
+const validationResult = idnr('13527248013')
+const validationResult = idnr('10915596784')
+const validationResult = idnr('68467038838')
 ```
 
 ### Resultat

@@ -36,7 +36,7 @@ export const getType = (digits) => {
    return 'fnr'
 }
 
-const idnr = (digits) => {
+export const idnr = (digits) => {
    const type = getType(digits)
    return validate(digits, type)
 }
