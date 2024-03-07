@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fnrvalidator",
   "version": "2.0.0",
+  "type": "module",
   "description": "Validation for Norwegian national id numbers (\"fødselsnummer\" and \"d-nummer\")",
   "scripts": {
     "build": "babel src -d dist",

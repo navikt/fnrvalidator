@@ -2,27 +2,27 @@
 
 const elevenDigits = new RegExp('^\\d{11}$')
 
-const fnr = (digits) => {
+export const fnr = (digits) => {
    return idnr(digits)
 }
 
-const dnr = (digits) => {
+export const dnr = (digits) => {
    return idnr(digits)
 }
 
-const hnr = (digits) => {
+export const hnr = (digits) => {
    return idnr(digits)
 }
 
-const tnr = (digits) => {
+export const tnr = (digits) => {
    return idnr(digits)
 }
 
-const dnrAndHnr = (digits) => {
+export const dnrAndHnr = (digits) => {
    return idnr(digits)
 }
 
-const getType = (digits) => {
+export const getType = (digits) => {
    if (digits.substring(0, 1) >= 4 && digits.substring(2, 3) >= 4) {
       return 'dnr-and-hnr'
    }
@@ -94,9 +94,3 @@ const birthdate = (digits, type) => {
       [] : ["invalid date"]
  }
 
- exports.fnr = fnr
- exports.dnr = dnr
- exports.hnr = hnr
- exports.tnr = tnr
- exports.dnrAndHnr = dnrAndHnr
- exports.idnr = idnr
