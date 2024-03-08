@@ -24,6 +24,7 @@ jobs:
             npm.pkg.github.com:443
             fulcio.sigstore.dev:443
             rekor.sigstore.dev:443
+            registry.npmjs.org:443
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # ratchet:actions/checkout@v4
         with:
           persist-credentials: false
@@ -32,6 +33,8 @@ jobs:
           registry-url: "https://npm.pkg.github.com"
           scope: "@navikt"
           node-version: ${{ env.NODE_VERSION }}
+      - run: npm ci
+      - run: npm run build
       - run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
