@@ -53,7 +53,7 @@ eller
 
 
 ### Bygg og publisering
-```npm run build && npm publish```
+For å publisere en ny npm-pakke, lag en [release](https://github.com/navikt/fnrvalidator/releases) her på GitHub. En workflow vil plukke opp den nye releasen og publisere. Versjonen på pakken blir den samme som i `package.json`, så husk å oppdatere der først.
 
 # Henvendelser
 
