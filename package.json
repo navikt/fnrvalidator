@@ -1,6 +1,6 @@
 {
   "name": "@navikt/fnrvalidator",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "type": "module",
   "description": "Validation for Norwegian national id numbers (\"fødselsnummer\" and \"d-nummer\")",
   "scripts": {
