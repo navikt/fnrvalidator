@@ -20,7 +20,7 @@
    "typings": "dist/validator.d.ts",
    "devDependencies": {
       "@babel/cli": "^7.17.10",
-      "@babel/core": "^7.24.0",
+      "@babel/core": "^7.24.3",
       "@babel/preset-env": "^7.24.0",
       "@types/jest": "^29.5.12",
       "caniuse-lite": "^1.0.30001596",
