@@ -19,7 +19,7 @@
    "main": "dist/validator.js",
    "typings": "dist/validator.d.ts",
    "devDependencies": {
-      "@babel/cli": "^7.17.10",
+      "@babel/cli": "^7.24.1",
       "@babel/core": "^7.24.0",
       "@babel/preset-env": "^7.24.0",
       "@types/jest": "^29.5.12",
