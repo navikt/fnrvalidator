@@ -1,6 +1,6 @@
 'use strict'
 
-import { fnr, dnr, hnr, tnr, dnrAndHnr } from '../src/validator'
+import { fnr, dnr, hnr, tnr, dnrAndHnr, dnrAndTnr } from '../src/validator'
 
 describe("fnr", function () {
 
@@ -142,6 +142,18 @@ describe("dnr-and-hnr", function () {
       return expect(result).toEqual({
          status: "valid",
          type: "dnr-and-hnr",
+      });
+   });
+})
+;
+
+describe("dnr-and-tnr", function () {
+   // combined dnr and tnr - so first digit is increased with 4 and third digit is increased with 8
+   it("should accept a valid one", function () {
+      const result = dnrAndTnr("50846202355");
+      return expect(result).toEqual({
+         status: "valid",
+         type: "dnr-and-tnr",
       });
    });
 })
