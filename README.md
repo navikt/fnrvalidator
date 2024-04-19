@@ -1,6 +1,11 @@
 fnrvalidator
 ================
 
+
+> [!WARNING]  
+> Etter flere forsøk på å finne noen i NAV IT som ønsker å overta eierskapet til dette repoet så kommer det til å bli arkivert 1. mai dersom ingen melder seg innen da. De allerede publiserte npm-pakkene vil etter det jeg kan tyde ut fra GitHubs dokumentasjon fortsatt være tilgjengelige etter arkivering.
+
+
 ![](https://github.com/navikt/fnrvalidator/workflows/master/badge.svg)
 [![npm version](https://badge.fury.io/js/%40navikt%2Ffnrvalidator.svg)](https://badge.fury.io/js/%40navikt%2Ffnrvalidator)
 
