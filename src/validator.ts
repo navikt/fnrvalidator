@@ -5,7 +5,7 @@ type CHECKSUM_ERROR = "checksums don't match";
 type DATE_ERROR = 'invalid date';
 type ErrorReason = LENGTH_ERROR | CHECKSUM_ERROR | DATE_ERROR;
 type OkResult = { status: 'valid'; type: NrType };
-type NrType = 'dnr' | 'fnr' | 'hnr' | 'tnr' | 'dnr-and-hnr'
+type NrType = 'dnr' | 'fnr' | 'hnr' | 'tnr' | 'dnr-and-hnr' | 'dnr-and-tnr';
 type ErrorResult = { status: 'invalid'; reasons: ErrorReason[] };
 type ValidationResult = OkResult | ErrorResult;
 
@@ -31,16 +31,25 @@ export const dnrAndHnr = (digits: string): ValidationResult => {
    return idnr(digits)
 }
 
+export const dnrAndTnr = (digits: string): ValidationResult => {
+   return idnr(digits)
+}
+
 export const getType = (digits: string): NrType => {
    let nrs = digits.split("").map(Number)
+   if (nrs[0] >= 4 && nrs[2] >= 8) {
+      return 'dnr-and-tnr'
+   }
    if (nrs[0] >= 4 && nrs[2] >= 4) {
       return 'dnr-and-hnr'
    }
-   else if (nrs[0] >= 4) {
+   if (nrs[0] >= 4) {
       return 'dnr'
-   } else if (nrs[2] >= 8) {
+   } 
+   if (nrs[2] >= 8) {
       return "tnr"
-   } else if (nrs[2] >= 4) {
+   } 
+   if (nrs[2] >= 4) {
       return 'hnr'
    }
    return 'fnr'
@@ -83,7 +92,7 @@ const checksums = (digits: string): Array<CHECKSUM_ERROR> => {
 }
 
 // copied from https://stackoverflow.com/questions/5812220/how-to-validate-a-date
-const birthdate = (digits: string, type: string): Array<DATE_ERROR> => {
+const birthdate = (digits: string, type: NrType): Array<DATE_ERROR> => {
    if (type === 'dnr') {
       digits = (Number(digits.substring(0, 1)) - 4) + digits.substring(1)
    } else if (type === 'hnr') {
@@ -92,6 +101,8 @@ const birthdate = (digits: string, type: string): Array<DATE_ERROR> => {
       digits = digits.substring(0, 2) + (Number(digits.substring(2, 3)) - 8) + digits.substring(3)
    } else if (type === 'dnr-and-hnr') {
       digits = (Number(digits.substring(0, 1)) - 4) + digits.substring(1, 2) + (Number(digits.substring(2, 3)) - 4) + digits.substring(3)
+   } else if (type === 'dnr-and-tnr') {
+      digits =  Number(digits.substring(0, 1)) -4 + digits.substring(1, 2) + (Number(digits.substring(2, 3)) - 8) + digits.substring(3)
    }
 
    const day = Number(digits.substring(0, 2))
