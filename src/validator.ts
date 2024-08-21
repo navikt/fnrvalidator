@@ -111,9 +111,9 @@ const birthdate = (digits: string, type: NrType): Array<DATE_ERROR> => {
    const year = yearString == '00' ? 2000 : Number(yearString)
 
    // set year 00 default to 2000 instead of 1900
-   const date = new Date(year, month - 1, day)
+   const date = new Date(Date.UTC(year, month - 1, day))
 
-   return (date && (date.getMonth() + 1) == month && date.getDate() == day) ?
+   return (date && (date.getUTCMonth() + 1) == month && date.getUTCDate() == day) ?
       [] : ["invalid date"]
  }
 
