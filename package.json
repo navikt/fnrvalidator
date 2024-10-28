@@ -19,7 +19,7 @@
    "main": "dist/validator.js",
    "typings": "dist/validator.d.ts",
    "devDependencies": {
-      "@types/jest": "^29.5.12",
+      "@types/jest": "^29.5.14",
       "jest": "^29.7.0",
       "ts-jest": "^29.1.2",
       "typescript": "^5.4.5"
