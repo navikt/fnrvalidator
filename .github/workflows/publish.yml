@@ -1,4 +1,4 @@
-name: Publish GitHub releases
+name: Publish to GitHub and npm
 on:
   release:
     types: [published]
@@ -7,15 +7,16 @@ permissions:
   contents: read
 
 jobs:
-  publish:
+  publish-github:
+    name: Publish to GitHub Packages
     runs-on: ubuntu-latest
     permissions:
-      contents: "read"
-      id-token: "write"
+      contents: read
+      id-token: write
       packages: write
     steps:
       - name: Harden runner
-        uses: step-security/harden-runner@63c24ba6bd7ba022e95695ff85de572c04a18142 # ratchet:step-security/harden-runner@v2
+        uses: step-security/harden-runner@63c24ba6bd7ba022e95695ff85de572c04a18142
         with:
           disable-sudo: true
           egress-policy: block
@@ -24,11 +25,10 @@ jobs:
             npm.pkg.github.com:443
             fulcio.sigstore.dev:443
             rekor.sigstore.dev:443
-            registry.npmjs.org:443
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # ratchet:actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # ratchet:actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           registry-url: "https://npm.pkg.github.com"
           scope: "@navikt"
@@ -38,12 +38,30 @@ jobs:
       - run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Setup npm registry
-        uses: actions/setup-node@v4
+
+  publish-npm:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Harden runner
+        uses: step-security/harden-runner@63c24ba6bd7ba022e95695ff85de572c04a18142
+        with:
+          disable-sudo: true
+          egress-policy: block
+          allowed-endpoints: >
+            github.com:443 
+            registry.npmjs.org:443
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
         with:
           registry-url: "https://registry.npmjs.org"
           node-version: ${{ env.NODE_VERSION }}
-      - name: Publish to npm
-        run: npm publish --access public
+      - run: npm ci
+      - run: npm run build
+      - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
