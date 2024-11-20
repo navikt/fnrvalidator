@@ -38,3 +38,12 @@ jobs:
       - run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup npm registry
+        uses: actions/setup-node@v4
+        with:
+          registry-url: "https://registry.npmjs.org"
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Publish to npm
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPMJS }}
