@@ -79,16 +79,45 @@ const validate = (digits: string, type: NrType): ValidationResult => {
 
 const checksums = (digits: string): Array<CHECKSUM_ERROR> => {
    let nrs = digits.split("").map(Number)
-   let k1 = 11 - ((3 * nrs[0] + 7 * nrs[1] + 6 * nrs[2] + 1 * nrs[3] + 8 * nrs[4] +
-      9 * nrs[5] + 4 * nrs[6] + 5 * nrs[7] + 2 * nrs[8]) % 11)
+   
+   // Calculate the weighted sum for k1
+   const k1Sum = 3 * nrs[0] + 7 * nrs[1] + 6 * nrs[2] + 1 * nrs[3] + 8 * nrs[4] +
+      9 * nrs[5] + 4 * nrs[6] + 5 * nrs[7] + 2 * nrs[8]
+   
+   // https://skatteetaten.github.io/folkeregisteret-api-dokumentasjon/nytt-fodselsnummer-fra-2032/
+   // New standard (2032): k1 can be calculated with rest values 0, 1, 2, or 3
+   // This allows for 4 possible valid values for k1
+   const validK1Values: number[] = []
+   
+   for (let rest = 0; rest <= 3; rest++) {
+      let k1 = (11 + rest) - (k1Sum % 11)
+      
+      // If k1 > 10, subtract 11
+      if (k1 > 10) {
+         k1 = k1 - 11
+      }
+      
+      // Discard if k1 = 10
+      if (k1 !== 10) {
+         validK1Values.push(k1)
+      }
+   }
+   
+   const k1Actual = nrs[9]
+   
+   // Check if the actual k1 is one of the valid values
+   if (!validK1Values.includes(k1Actual)) {
+      return ["checksums don't match"]
+   }
+   
+   // Calculate k2 using the actual k1 value (same as before, only one valid value)
    let k2 = 11 - ((5 * nrs[0] + 4 * nrs[1] + 3 * nrs[2] + 2 * nrs[3] + 7 *
-      nrs[4] + 6 * nrs[5] + 5 * nrs[6] + 4 * nrs[7] + 3 * nrs[8] + 2 * k1) % 11)
-
-   if (k1 === 11) k1 = 0
+      nrs[4] + 6 * nrs[5] + 5 * nrs[6] + 4 * nrs[7] + 3 * nrs[8] + 2 * k1Actual) % 11)
+   
    if (k2 === 11) k2 = 0
-
-   return k1 < 10 && k2 < 10 && k1 == nrs[9] && k2 == nrs[10] ?
-      [] : ["checksums don't match"]
+   
+   // k2 must be less than 10 and match the actual value
+   return k2 < 10 && k2 === nrs[10] ? [] : ["checksums don't match"]
 }
 
 // copied from https://stackoverflow.com/questions/5812220/how-to-validate-a-date
