@@ -6,6 +6,9 @@ on:
 permissions:
   contents: read
 
+env:
+  NODE_VERSION: "20.x"
+
 jobs:
   publish-github:
     name: Publish to GitHub Packages
@@ -34,8 +37,9 @@ jobs:
           registry-url: "https://npm.pkg.github.com"
           scope: "@navikt"
           node-version: ${{ env.NODE_VERSION }}
-      - run: npm ci
-      - run: npm run build
+          cache: 'yarn'
+      - run: yarn install --immutable
+      - run: yarn build
       - run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -61,8 +65,9 @@ jobs:
         with:
           registry-url: "https://registry.npmjs.org"
           node-version: ${{ env.NODE_VERSION }}
-      - run: npm ci
-      - run: npm run build
+          cache: 'yarn'
+      - run: yarn install --immutable
+      - run: yarn build
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
