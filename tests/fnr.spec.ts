@@ -158,3 +158,71 @@ describe("dnr-and-tnr", function () {
    });
 })
 ;
+
+describe("New 2032 checksum standard", function () {
+   // Tests for the new checksum calculation that allows multiple valid k1 values
+   
+   it("should accept person born 02.01.2032 with new checksum", function () {
+      // Example from spec: fødselsdato='020132', individnummer='999', k1=9, k2=7
+      const result = fnr("02013299997")
+      return expect(result).toEqual({
+         status: "valid",
+         type: "fnr"
+      })
+   })
+
+   it("should accept person 1 born 30.10.1982 with new checksum (rest=0)", function () {
+      // Example from spec: fødselsdato='301082', individnummer='999', k1=2, k2=0
+      const result = fnr("30108299920")
+      return expect(result).toEqual({
+         status: "valid",
+         type: "fnr"
+      })
+   })
+
+   it("should accept person 2 born 30.10.1982 with new checksum (rest=1)", function () {
+      // Example from spec: fødselsdato='301082', individnummer='999', k1=3, k2=9
+      const result = fnr("30108299939")
+      return expect(result).toEqual({
+         status: "valid",
+         type: "fnr"
+      })
+   })
+
+   it("should accept multiple valid k1 values for same birth date and individual number", function () {
+      // Both k1 values should be valid for the same person
+      const result1 = fnr("30108299920") // k1=2 (rest=0)
+      const result2 = fnr("30108299939") // k1=3 (rest=1)
+      
+      expect(result1.status).toBe("valid")
+      expect(result2.status).toBe("valid")
+   })
+
+   it("should still reject invalid checksums with new standard", function () {
+      // Invalid k1 value that doesn't match any of the 4 possible values
+      const result = fnr("02013299987") // Wrong k1 (should be 9)
+      return expect(result).toEqual({
+         status: "invalid",
+         reasons: ["checksums don't match"]
+      })
+   })
+
+   it("should still reject invalid k2 with new standard", function () {
+      // Valid k1 but invalid k2
+      const result = fnr("02013299996") // k1=9 is correct, but k2 should be 7
+      return expect(result).toEqual({
+         status: "invalid",
+         reasons: ["checksums don't match"]
+      })
+   })
+
+   it("should work with dnr using new checksum standard", function () {
+      // DNR version of 30.10.1982 with new checksum: day+40 = 70
+      // Using the same individual number 999 as the fnr example
+      const result = dnr("70108299914")
+      return expect(result).toEqual({
+         status: "valid",
+         type: "dnr"
+      })
+   })
+})
