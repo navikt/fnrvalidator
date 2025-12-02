@@ -1,68 +1,73 @@
 name: Publish to GitHub and npm
 on:
-  release:
-    types: [published]
-  workflow_dispatch:
+   release:
+      types: [published]
+   workflow_dispatch:
 permissions:
-  contents: read
+   contents: read
+
+env:
+   NODE_VERSION: "24.x"
 
 jobs:
-  publish-github:
-    name: Publish to GitHub Packages
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
-      packages: write
-    steps:
-      - name: Harden runner
-        uses: step-security/harden-runner@63c24ba6bd7ba022e95695ff85de572c04a18142
-        with:
-          disable-sudo: true
-          egress-policy: block
-          allowed-endpoints: >
-            github.com:443 
-            npm.pkg.github.com:443
-            registry.npmjs.org:443
-            fulcio.sigstore.dev:443
-            rekor.sigstore.dev:443
-      - uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v4
-        with:
-          registry-url: "https://npm.pkg.github.com"
-          scope: "@navikt"
-          node-version: ${{ env.NODE_VERSION }}
-      - run: npm ci
-      - run: npm run build
-      - run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+   publish-github:
+      name: Publish to GitHub Packages
+      runs-on: ubuntu-latest
+      permissions:
+         contents: read
+         id-token: write
+         packages: write
+      steps:
+         - name: Harden runner
+           uses: step-security/harden-runner@63c24ba6bd7ba022e95695ff85de572c04a18142
+           with:
+              disable-sudo: true
+              egress-policy: block
+              allowed-endpoints: >
+                 github.com:443 
+                 npm.pkg.github.com:443
+                 registry.npmjs.org:443
+                 fulcio.sigstore.dev:443
+                 rekor.sigstore.dev:443
+         - uses: actions/checkout@v4
+           with:
+              persist-credentials: false
+         - uses: actions/setup-node@v4
+           with:
+              registry-url: "https://npm.pkg.github.com"
+              scope: "@navikt"
+              node-version: ${{ env.NODE_VERSION }}
+              cache: "yarn"
+         - run: yarn install --immutable
+         - run: yarn build
+         - run: npm publish --provenance --access public
+           env:
+              NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  publish-npm:
-    name: Publish to npm
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    steps:
-      - name: Harden runner
-        uses: step-security/harden-runner@63c24ba6bd7ba022e95695ff85de572c04a18142
-        with:
-          disable-sudo: true
-          egress-policy: block
-          allowed-endpoints: >
-            github.com:443 
-            registry.npmjs.org:443
-      - uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v4
-        with:
-          registry-url: "https://registry.npmjs.org"
-          node-version: ${{ env.NODE_VERSION }}
-      - run: npm ci
-      - run: npm run build
-      - run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
+   publish-npm:
+      name: Publish to npm
+      runs-on: ubuntu-latest
+      permissions:
+         contents: read
+      steps:
+         - name: Harden runner
+           uses: step-security/harden-runner@63c24ba6bd7ba022e95695ff85de572c04a18142
+           with:
+              disable-sudo: true
+              egress-policy: block
+              allowed-endpoints: >
+                 github.com:443 
+                 registry.npmjs.org:443
+         - uses: actions/checkout@v4
+           with:
+              persist-credentials: false
+         - uses: actions/setup-node@v4
+           with:
+              registry-url: "https://registry.npmjs.org"
+              node-version: ${{ env.NODE_VERSION }}
+              cache: "yarn"
+         - run: yarn install --immutable
+         - run: yarn build
+         - run: npm publish --access public
+           env:
+              NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}

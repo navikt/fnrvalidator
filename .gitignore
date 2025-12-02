@@ -31,17 +31,21 @@ build/Release
 node_modules
 jspm_packages
 
-# Optional npm cache directory
-.npm
 
 # Optional REPL history
 .node_repl_history
-
-# Yarn package manager
-yarn.lock
 
 # IntelliJ project folder
 .idea
 
 # Built JS folder
 dist
+
+# Yarn
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
