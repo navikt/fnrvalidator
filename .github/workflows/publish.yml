@@ -70,6 +70,6 @@ jobs:
               cache: "yarn"
          - run: yarn install --immutable
          - run: yarn build
+         - name: Update npm
+           run: npm install -g npm@11.5.1
          - run: npm publish --access public
-           env:
-              NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
