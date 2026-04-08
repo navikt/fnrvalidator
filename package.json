@@ -3,9 +3,9 @@
    "version": "2.2.1",
    "description": "Validation for Norwegian national id numbers (\"fødselsnummer\" and \"d-nummer\")",
    "scripts": {
-      "build": "tsc",
-      "test": "jest",
-      "test-w": "jest --watch"
+      "build": "tsc -p tsconfig.build.json",
+      "check": "tsc --noEmit",
+      "test": "yarn check && node --no-warnings tests/fnr.spec.ts"
    },
    "author": "NAV (https://nav.no)",
    "license": "MIT",
@@ -19,9 +19,6 @@
    "main": "dist/validator.js",
    "typings": "dist/validator.d.ts",
    "devDependencies": {
-      "@types/jest": "^30.0.0",
-      "jest": "^30.3.0",
-      "ts-jest": "^29.4.5",
       "typescript": "^5.9.3"
    },
    "packageManager": "yarn@4.12.0"
