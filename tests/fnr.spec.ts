@@ -2,7 +2,7 @@
 
 import { fnr, dnr, hnr, tnr, dnrAndHnr, dnrAndTnr, type ValidationResult } from '../src/validator.ts'
 
-function assertEqual(actual: ValidationResult | string, expected: ValidationResult | string, testName: string): void {
+function assertEqual(actual: ValidationResult , expected: ValidationResult , testName: string): void {
    if (JSON.stringify(actual) !== JSON.stringify(expected)) {
       throw new Error(`${testName}\n\nExpected: ${JSON.stringify(expected)}\nReceived: ${JSON.stringify(actual)}`)
    }
@@ -125,8 +125,8 @@ function assertEqual(actual: ValidationResult | string, expected: ValidationResu
 {
    const result1 = fnr("30108299920")
    const result2 = fnr("30108299939")
-   assertEqual(result1.status, "valid", "New 2032 checksum standard › should accept multiple valid k1 values for same birth date and individual number")
-   assertEqual(result2.status, "valid", "New 2032 checksum standard › should accept multiple valid k1 values for same birth date and individual number")
+   assertEqual(result1, {status: "valid", type: "fnr"}, "New 2032 checksum standard › should accept multiple valid k1 values for same birth date and individual number")
+   assertEqual(result2, {status: "valid", type: "fnr"}, "New 2032 checksum standard › should accept multiple valid k1 values for same birth date and individual number")
 }
 
 {
