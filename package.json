@@ -3,7 +3,7 @@
    "version": "2.2.1",
    "description": "Validation for Norwegian national id numbers (\"fødselsnummer\" and \"d-nummer\")",
    "scripts": {
-      "build": "tsc",
+      "build": "tsc -p tsconfig.build.json",
       "test": "node --no-warnings tests/fnr.spec.ts"
    },
    "author": "NAV (https://nav.no)",
