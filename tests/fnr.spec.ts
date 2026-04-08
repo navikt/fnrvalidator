@@ -1,20 +1,20 @@
 'use strict'
 
-import { fnr, dnr, hnr, tnr, dnrAndHnr, dnrAndTnr } from '../src/validator.ts'
+import { fnr, dnr, hnr, tnr, dnrAndHnr, dnrAndTnr, type ValidationResult, type ErrorResult } from '../src/validator.ts'
 
-function deepEqual(a: unknown, b: unknown): boolean {
+function deepEqual(a: ValidationResult | ErrorResult | string, b: ValidationResult | ErrorResult | string): boolean {
    if (a === b) return true
    if (a === null || b === null || typeof a !== 'object' || typeof b !== 'object') return false
-   const keysA = Object.keys(a as Record<string, unknown>)
-   const keysB = Object.keys(b as Record<string, unknown>)
+   const keysA = Object.keys(a)
+   const keysB = Object.keys(b)
    if (keysA.length !== keysB.length) return false
    for (const key of keysA) {
-      if (!deepEqual((a as Record<string, unknown>)[key], (b as Record<string, unknown>)[key])) return false
+      if (!deepEqual((a as Record<string, ValidationResult | ErrorResult | string>)[key], (b as Record<string, ValidationResult | ErrorResult | string>)[key])) return false
    }
    return true
 }
 
-function assertEqual(actual: unknown, expected: unknown, testName: string): void {
+function assertEqual(actual: ValidationResult | ErrorResult | string, expected: ValidationResult | ErrorResult | string, testName: string): void {
    if (!deepEqual(actual, expected)) {
       throw new Error(`${testName}\n\nExpected: ${JSON.stringify(expected)}\nReceived: ${JSON.stringify(actual)}`)
    }
