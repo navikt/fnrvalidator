@@ -35,3 +35,12 @@ jobs:
            run: yarn test
          - name: build
            run: yarn build
+
+   sif-code-scan:
+      runs-on: ubuntu-latest
+      permissions:
+         contents: read
+      steps:
+         - uses: actions/checkout@v6
+         - uses: navikt/sif-gha-workflows/.github/actions/sif-code-scan@main
+
