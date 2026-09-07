@@ -20,7 +20,7 @@
    "typings": "dist/validator.d.ts",
    "devDependencies": {
       "@types/jest": "^30.0.0",
-      "jest": "^30.4.2",
+      "jest": "^30.5.0",
       "ts-jest": "^29.4.9",
       "typescript": "^5.9.3"
    },
