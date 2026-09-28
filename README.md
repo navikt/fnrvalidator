@@ -24,7 +24,6 @@ const fnr = fnr('12345678910')
 const dnr = dnr('52345678910')
 const hnr = hnr('13527248013')
 const tnr = tnr('10915596784')
-const dnrAndHnr = validator.dnrAndHnr('68467038838')
 // eller
 const validationResult = idnr('12345678910')
 const validationResult = idnr('52345678910')
