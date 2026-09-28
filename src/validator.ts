@@ -6,8 +6,8 @@ type DATE_ERROR = 'invalid date';
 type ErrorReason = LENGTH_ERROR | CHECKSUM_ERROR | DATE_ERROR;
 type OkResult = { status: 'valid'; type: NrType };
 type NrType = 'dnr' | 'fnr' | 'hnr' | 'tnr' | 'dnr-and-hnr' | 'dnr-and-tnr';
-type ErrorResult = { status: 'invalid'; reasons: ErrorReason[] };
-type ValidationResult = OkResult | ErrorResult;
+export type ErrorResult = { status: 'invalid'; reasons: ErrorReason[] };
+export type ValidationResult = OkResult | ErrorResult;
 
 const elevenDigits = new RegExp('^\\d{11}$')
 
